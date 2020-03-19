@@ -12,6 +12,7 @@ import javax.faces.validator.ValidatorException;
 import br.com.caelum.livraria.dao.DAO;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
+import br.com.caelum.livraria.util.RedirectView;
 
 @ManagedBean
 @ViewScoped
@@ -70,4 +71,9 @@ public class LivroBean {
 			throw new ValidatorException(new FacesMessage("ISBN deve começar com o número"));
 		}
 	}
+
+	public RedirectView formAutor() {
+		return new RedirectView("autor");
+	}
+
 }

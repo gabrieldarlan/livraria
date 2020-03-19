@@ -21,9 +21,9 @@
 
 				<h:outputLabel value="ISBN:" for="isbn" />
 				<h:inputText id="isbn" value="#{livroBean.livro.isbn}"
-					validator="#{livroBean.comecaComDigitoUm}" >
-						<f:ajax event="blur" render="messages"/>
-					</h:inputText>
+					validator="#{livroBean.comecaComDigitoUm}">
+					<f:ajax event="blur" render="messages" />
+				</h:inputText>
 
 				<h:outputLabel value="Preço:" for="preco" />
 				<h:inputText id="preco" value="#{livroBean.livro.preco}"
@@ -54,6 +54,9 @@
 				action="#{livroBean.gravarAutor}">
 				<f:ajax execute="autor" render="tabelaAutores" />
 			</h:commandButton>
+
+			<h:commandLink value="Cadastrar novo Autor"
+				action="#{livroBean.formAutor}" immediate="true" />
 
 			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor"
 				id="tabelaAutores">
