@@ -6,6 +6,11 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <ui:composition template="_template.xhtml">
+	<f:metadata>
+		<f:viewParam name="autorId" value="#{autorBean.autorId}" />
+		<f:viewAction action="#{autorBean.carregarPelaId}" if="#{param.autorId != null}" />
+	</f:metadata>
+
 	<ui:define name="titulo">Novo Autor</ui:define>
 	<ui:define name="conteudo">
 		<h:messages globalOnly="true" />
@@ -32,17 +37,19 @@
 				<h:dataTable id="tabelaAutores" value="#{autorBean.autores}"
 					var="autor">
 					<h:column>
+						<f:facet name="header">Autor</f:facet>
 						<h:outputText value="#{autor.nome}" />
 					</h:column>
 
 					<h:column>
-						<h:commandLink value="Alterar"
+						<f:facet name="header">Alterar</f:facet>
+						<h:commandLink value="altera"
 							action="#{autorBean.carregar(autor)}" />
 					</h:column>
 
 					<h:column>
-						<h:commandLink value="Remover"
-							action="#{autorBean.remover(autor)}" />
+						<f:facet name="header">Remover</f:facet>
+						<h:commandLink value="remove" action="#{autorBean.remover(autor)}" />
 					</h:column>
 
 				</h:dataTable>
