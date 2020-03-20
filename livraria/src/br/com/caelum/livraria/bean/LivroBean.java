@@ -1,5 +1,6 @@
 package br.com.caelum.livraria.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -26,6 +27,17 @@ public class LivroBean {
 		return livro;
 	}
 
+	
+	private List<Livro> livrosRetornados = new ArrayList<Livro>();
+	
+	public List<Livro> getLivrosRetornados() {
+		return livrosRetornados;
+	}
+	
+	public void setLivrosRetornados(List<Livro> livrosRetornados) {
+		this.livrosRetornados = livrosRetornados;
+	}
+	
 	public void gravarAutor() {
 		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
 		this.livro.adicionaAutor(autor);
@@ -40,7 +52,7 @@ public class LivroBean {
 	}
 
 	public List<Livro> getLivros() {
-		return new DAO<Livro>(Livro.class).listaTodos();
+		return livrosRetornados = new DAO<Livro>(Livro.class).listaTodos();
 	}
 
 	public void gravar() {
