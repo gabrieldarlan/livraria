@@ -31,7 +31,7 @@ public class DAO<T> {
 		em.close();
 	}
 
-	public void remove(T t) {
+	public void remove(T t) throws RuntimeException {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
 

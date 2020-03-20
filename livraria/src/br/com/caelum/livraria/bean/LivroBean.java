@@ -44,15 +44,18 @@ public class LivroBean {
 	}
 
 	public void gravar() {
-		System.out.println("Gravando livro " + this.livro.getTitulo());
-
+//		System.out.println("Gravando livro " + this.livro.getTitulo());
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (livro.getAutores().isEmpty()) {
 			context.addMessage("autor", new FacesMessage("O autor é obrigatório"));
 		}
 
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
+		if(this.livro.getId()==null) {
+			new DAO<Livro>(Livro.class).adiciona(this.livro);
+		} else {
+			new DAO<Livro>(Livro.class).atualiza(this.livro);
+		}
 
 		this.livro = new Livro();
 	}
@@ -76,4 +79,21 @@ public class LivroBean {
 		return new RedirectView("autor");
 	}
 
+	public void remove(Livro livro) {
+		try {
+			new DAO<Livro>(Livro.class).remove(livro);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Erro na remoção do livro");
+		}
+	}
+
+	public void carregar(Livro livro) {
+		this.livro = livro;
+	}
+	
+	public void removeAutorDoLivro(Autor autor) {
+		this.livro.remove(autor);
+	}
+	
 }

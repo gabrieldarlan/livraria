@@ -8,7 +8,8 @@
 <ui:composition template="_template.xhtml">
 	<ui:define name="titulo">Novo Autor</ui:define>
 	<ui:define name="conteudo">
-		<h:form>
+		<h:messages globalOnly="true" />
+		<h:form id="formAutor">
 			<fieldset>
 				<legend>Dados do Autor</legend>
 				<h:panelGrid columns="3">
@@ -23,6 +24,32 @@
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
+
+		<h:form id="formTabelaAutores">
+			<h:messages globalOnly="true" />
+			<fieldset>
+				<legend>Tabela de Autores</legend>
+				<h:dataTable id="tabelaAutores" value="#{autorBean.autores}"
+					var="autor">
+					<h:column>
+						<h:outputText value="#{autor.nome}" />
+					</h:column>
+
+					<h:column>
+						<h:commandLink value="Alterar"
+							action="#{autorBean.carregar(autor)}" />
+					</h:column>
+
+					<h:column>
+						<h:commandLink value="Remover"
+							action="#{autorBean.remover(autor)}" />
+					</h:column>
+
+				</h:dataTable>
+			</fieldset>
+		</h:form>
+
+
 	</ui:define>
 </ui:composition>
 </html>
