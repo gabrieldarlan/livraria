@@ -23,7 +23,7 @@ public class LoginBean {
 		this.usuario = usuario;
 	}
 
-	public RedirectView efetuarLogin() {
+	public String efetuarLogin() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		boolean existe = new UsuarioDao().existe(this.usuario);
@@ -31,11 +31,12 @@ public class LoginBean {
 		if (existe) {
 			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
 			this.usuario = new Usuario();
-			return new RedirectView("livro");
+			return "livro?faces-redirect=true";
 		}
 
-		context.addMessage("login:email", new FacesMessage("Usuário não encontrado"));
-		return new RedirectView("login");
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		context.addMessage(null, new FacesMessage("Usuário não encontrado"));
+		return "login?faces-redirect=true";
 	}
 
 	public RedirectView logout() {

@@ -17,7 +17,6 @@ public class Autorizador implements PhaseListener {
 	public void afterPhase(PhaseEvent event) {
 		FacesContext context = event.getFacesContext();
 		String nomePagina = context.getViewRoot().getViewId();
-		System.out.println(nomePagina);
 
 		if ("/login.xhtml".equals(nomePagina)) {
 			return;
